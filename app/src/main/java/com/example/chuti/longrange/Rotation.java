@@ -49,6 +49,8 @@ public class Rotation extends Activity implements SensorEventListener {
     private int pitchSetZero;
     private float setZero = 0;
     private TextView textView;
+    private double distance;
+    private double height;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,14 +195,17 @@ public class Rotation extends Activity implements SensorEventListener {
     }
 
     public void receiveValuefromBarometer(){
-        String distance = getIntent().getStringExtra("distanceVal");
-        String height = getIntent().getStringExtra("height");
-        Log.v("distance",distance.toString());
-        Log.v("height",height.toString());
+        distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
+        height = Double.valueOf(getIntent().getStringExtra("height"));
+        Log.v("distance",String.valueOf(distance));
+        Log.v("height", String.valueOf(height));
+        calculateAngle();
     }
 
     public void calculateAngle(){
-
+        double angle = Math.toDegrees(Math.atan2(height, distance));
+        Log.v("Angle",String.valueOf(angle));
+        ((TextView)findViewById(R.id.angle)).setText("มุมของจาน : " + String.format("%.1f",angle));
     }
 
 }
