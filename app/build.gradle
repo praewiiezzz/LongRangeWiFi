@@ -7,9 +7,11 @@ android {
     defaultConfig {
         applicationId "com.example.chuti.longrange"
         minSdkVersion 21
+        useLibrary 'org.apache.http.legacy'
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,5 +22,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.android.gms:play-services:10.2.0'
+    compile 'com.google.android.gms:play-services:8.3.0'
+    compile files('libs/org.apache.commons.httpclient.jar')
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2' // for resolve import import org.apache.http in Rotation.java
 }
