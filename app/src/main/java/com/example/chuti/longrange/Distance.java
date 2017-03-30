@@ -138,11 +138,11 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         double dl = (lng_b-lng_a) / pk;
         double a = Math.sin(dq / 2)* Math.sin(dq / 2)+Math.cos(a1)*Math.cos(b1)*Math.sin(dl / 2)*Math.sin(dl / 2);
         double c = 2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-        return 6371e3*c/1000;  // km
+        return 6371e3*c;  // m
     }
 
     public void printDebug(){
-        Log.v("Distance", distance.toString());
+        Log.v("Distance : m ", distance.toString());
         Log.v("latitudeValCurrent", latitudeValCurrent.toString());
         Log.v("longitudeValCurrent", longitudeValCurrent.toString());
         Log.v("latitudeValDes", latitudeValDes.toString());
@@ -154,7 +154,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         longitudeValCurrent = Double.parseDouble(mLongitudeTextView.getText().toString());
         latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
         longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
-        distance = Double.parseDouble(String.format("%.2f",meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
+        distance = Double.parseDouble(String.format("%.4f",meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
     }
 
     public void callNextActivity(){
