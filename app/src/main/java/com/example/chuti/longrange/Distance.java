@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationServices;
 
 /**
@@ -40,64 +37,41 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.distance_page);
+        requestLocation();
 
         mLatitudeTextView = (TextView) findViewById(R.id.Latitude);
         mLongitudeTextView = (TextView) findViewById(R.id.Longitude);
         mLatitudeEditText = (EditText) findViewById(R.id.LatitudeEdit);
         mLongitudeEditText = (EditText) findViewById(R.id.LongitudeEdit);
         mButton = (Button)findViewById(R.id.button3);
+        mButton.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View view) {
+                        try {
+                            getCoordinates();
+                            printDebug();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // Call Next page
+                        try {
+                            callNextActivity();
 
+                        } catch (Exception e) {
+                            showErrorMessage("An error occured, please try again later");
+                        }
+                    }
+                });
+
+
+    }
+    public void requestLocation(){
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-        mButton.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        try{
-                            latitudeValCurrent = Double.parseDouble(mLatitudeTextView.getText().toString());
-                            longitudeValCurrent = Double.parseDouble(mLongitudeTextView.getText().toString());
-                            latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
-                            longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
-
-                            distance = meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes);
-                            distance = Double.parseDouble(String.format("%.2f",distance)); // 2 decimal
-
-                            Log.v("Distance", distance.toString());
-                            Log.v("latitudeValCurrent", latitudeValCurrent.toString());
-                            Log.v("longitudeValCurrent", longitudeValCurrent.toString());
-                            Log.v("latitudeValDes", latitudeValDes.toString());
-                            Log.v("longitudeValDes", longitudeValDes.toString());
-
-                        }
-                        catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        // Call Next page
-                        try{
-                            if(distance!=0) {
-                                startActivity(new Intent(Distance.this, MainActivity.class));
-                            }
-                        }
-                        catch(Exception e){
-                            Context context = getApplicationContext();
-                            CharSequence text = "Enter your destination";
-                            int duration = Toast.LENGTH_SHORT;
-
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //Toast.makeText( context,"Please enter your destination", Toast.LENGTH_LONG).show();
-
-                        }
-                    }
-                });
-
     }
-
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -123,12 +97,12 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
                     lastLocation.getLatitude()));
             mLongitudeTextView.setText(String.valueOf(
                     lastLocation.getLongitude()));
+
         }
         else {
-            Toast.makeText(this, "Cannot detect location", Toast.LENGTH_LONG).show();
+            showErrorMessage("Cannot detect location");
         }
     }
-
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -140,8 +114,6 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     public void onConnectionFailed(ConnectionResult connectionResult) {
         //Log.i(TAG, "Connection failed: error code = " + connectionResult.getErrorCode());
     }
-
-
 
     @Override
     protected void onStart() {
@@ -162,7 +134,6 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         double a2 = Math.toRadians(lng_a);
         double b1 = Math.toRadians(lat_b);
         double b2 = Math.toRadians(lng_b);
-
         double dq= (lat_b-lat_a) /pk;
         double dl = (lng_b-lng_a) / pk;
         double a = Math.sin(dq / 2)* Math.sin(dq / 2)+Math.cos(a1)*Math.cos(b1)*Math.sin(dl / 2)*Math.sin(dl / 2);
@@ -170,6 +141,43 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         return 6371e3*c/1000;  // km
     }
 
+    public void printDebug(){
+        Log.v("Distance", distance.toString());
+        Log.v("latitudeValCurrent", latitudeValCurrent.toString());
+        Log.v("longitudeValCurrent", longitudeValCurrent.toString());
+        Log.v("latitudeValDes", latitudeValDes.toString());
+        Log.v("longitudeValDes", longitudeValDes.toString());
+    }
 
+    public void getCoordinates(){
+        latitudeValCurrent = Double.parseDouble(mLatitudeTextView.getText().toString());
+        longitudeValCurrent = Double.parseDouble(mLongitudeTextView.getText().toString());
+        latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
+        longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
+        distance = Double.parseDouble(String.format("%.2f",meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
+    }
+
+    public void callNextActivity(){
+
+        if(latitudeValDes != null && longitudeValDes != null) {
+           //for pass data to next activitity
+            Intent intent = new Intent(Distance.this, Barometer.class);
+            //String eiei = "test";
+            intent.putExtra("distanceValue",distance.toString());
+            startActivity(intent);
+
+            //startActivity(new Intent(Distance.this, Barometer.class));
+        }
+        else{
+            showErrorMessage("Enter destination");
+        }
+    }
+
+    public void showErrorMessage(CharSequence text){
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
 
 }

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class Barometer extends Activity implements SensorEventListener {
 
     private TextView pressView;
@@ -27,7 +28,7 @@ public class Barometer extends Activity implements SensorEventListener {
     public Double pressureDes;
     private int num = 0;
     private Button mButton;
-    public double difHeight;
+    public double height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +44,26 @@ public class Barometer extends Activity implements SensorEventListener {
                 {
                     public void onClick(View view)
                     {
-                        try{
+                        try {
                             pressureDes = Double.parseDouble(pressureEd.getText().toString());
-
-
                         }
                         catch(Exception e){
                             e.printStackTrace();
                         }
                         // Call Next page
                         try{
-                            if(pressureDes!=0) {
-                                difHeight = altpress(pressure, pressureDes);
-                                difHeight = Double.parseDouble(String.format("%.2f",difHeight));
+                            if(pressureDes != 0 && pressureEd != null) {
+                                height = Double.parseDouble(String.format("%.2f",altpress(pressure, pressureDes)));
                                 Log.v("pressureDes", pressureDes.toString());
-                                Log.v("Height", String.valueOf(difHeight));
-                                startActivity(new Intent(Barometer.this, MainActivity.class));
+                                Log.v("Height", String.valueOf(height));
+                                passingValueAndCallNextPage();
+                            }
+                            else {
+                                showErrorMessage("Enter destination pressure");
                             }
                         }
                         catch(Exception e){
-                            Context context = getApplicationContext();
-                            CharSequence text = "Enter destination pressure";
-                            int duration = Toast.LENGTH_SHORT;
-
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //Toast.makeText( context,"Please enter your destination", Toast.LENGTH_LONG).show();
+                            showErrorMessage("An error occured, please try again later.");
 
                         }
                     }
@@ -76,10 +71,10 @@ public class Barometer extends Activity implements SensorEventListener {
 
         // Look for pressure sensor
         SensorManager snsMgr = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
-
         Sensor pS = snsMgr.getDefaultSensor(Sensor.TYPE_PRESSURE);
-
         snsMgr.registerListener(this, pS, SensorManager.SENSOR_DELAY_UI);
+
+
     }
 
 
@@ -89,9 +84,7 @@ public class Barometer extends Activity implements SensorEventListener {
 
         super.onResume();
         SensorManager snsMgr = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
-
         Sensor pS = snsMgr.getDefaultSensor(Sensor.TYPE_PRESSURE);
-
         snsMgr.registerListener(this, pS, SensorManager.SENSOR_DELAY_UI);
     }
 
@@ -102,8 +95,6 @@ public class Barometer extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         super.onStart();
     }
-
-
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -119,7 +110,6 @@ public class Barometer extends Activity implements SensorEventListener {
             pressure = (double)values[0];
             num=1;
             Log.v("Pressure", pressure.toString());
-
         }
 
     }
@@ -131,9 +121,23 @@ public class Barometer extends Activity implements SensorEventListener {
 
         altpress =  (1 - Math.pow((pressure/pstd), 0.190284)) * 145366.45*feetTometer;
         altpressDes =  (1 - Math.pow((pressureDes/pstd), 0.190284)) * 145366.45*feetTometer;
-        return Math.abs(altpress-altpressDes);
+        return altpress-altpressDes;
     }
 
+    public void showErrorMessage(CharSequence text){
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
 
-
+    public void passingValueAndCallNextPage(){
+        //Passing value from Distance.java
+        String distance = getIntent().getStringExtra("distanceValue");
+        Intent intent = new Intent(Barometer.this, Rotation.class);
+        //String eiei = "test";
+        intent.putExtra("distanceVal",distance.toString());
+        intent.putExtra("height",String.valueOf(height));
+        startActivity(intent);
+    }
 }
