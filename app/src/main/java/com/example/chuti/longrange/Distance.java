@@ -174,6 +174,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     }
 
     public void showErrorMessage(CharSequence text){
+
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);

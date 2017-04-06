@@ -5,12 +5,41 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity {
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
+
+public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button bntSecond = (Button) findViewById(R.id.buttonSecond);
+        bntSecond.setOnClickListener(this);
+       /* Button bntThird = (Button) findViewById(R.id.buttonThird);
+        bntThird.setOnClickListener(this);*/
+
+    }
+    public void onClick(View v) {
+        Intent i;
+        switch (v.getId()) {
+            case R.id.buttonSecond:
+                i = new Intent(getApplicationContext(), Distance.class);
+                startActivity(i);
+                break;
+/*            case R.id.buttonThird:
+                i = new Intent(getApplicationContext(), Third.class);
+                startActivity(i);
+                break;*/
+        }
+
     }
 
     @Override

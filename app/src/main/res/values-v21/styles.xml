@@ -2,4 +2,9 @@
 <resources>
     <style name="AppTheme" parent="android:Theme.Material.Light">
     </style>
+    <style name="pressStyle" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#2E9AFE</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">40dp</item>
+    </style>
 </resources>

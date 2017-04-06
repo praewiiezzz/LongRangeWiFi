@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#E4F1FE">
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Current Location"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textIsSelectable="true"
+            android:textColor="#1F3A93" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Latitude"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:id="@+id/text3"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Longitude"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/Latitude"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="Latitude"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:textColor="#2574A9"
+            android:textSize="20dp"
+            android:singleLine="true"
+            android:background="#8de3f6" />
+
+        <TextView
+            android:id="@+id/Longitude"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="Longitude"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:textColor="#2574A9"
+            android:textSize="20dp"
+            android:background="#8de3f6" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Enter your destination"
+            android:layout_column="7"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#1F3A93" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:id="@+id/table1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Latitude"
+            android:layout_column="3"
+            android:layout_weight="1"
+            android:layout_marginTop="25dp"
+            android:textSize="20dp"
+            android:textColor="#34495e" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Longitude"
+            android:layout_column="3"
+            android:layout_weight="1"
+            android:layout_marginTop="25dp"
+            android:textSize="20dp"
+            android:textColor="#34495e" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/table2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/LatitudeEdit"
+            android:layout_column="9"
+            android:background="#8de3f6"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="15dp" />
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/LongitudeEdit"
+            android:background="#8de3f6"
+            android:layout_column="11"
+            android:layout_marginRight="10dp" />
+    </TableRow>
+
+    <Button
+
+        android:text="Next"
+        android:id="@+id/button3"
+        android:layout_marginTop = "100dp"
+        android:layout_weight="1"
+        android:layout_height="18dp"/>
+
+
+</TableLayout>

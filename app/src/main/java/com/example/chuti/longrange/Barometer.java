@@ -121,7 +121,7 @@ public class Barometer extends Activity implements SensorEventListener {
 
         altpress =  (1 - Math.pow((pressure/pstd), 0.190284)) * 145366.45*feetTometer;
         altpressDes =  (1 - Math.pow((pressureDes/pstd), 0.190284)) * 145366.45*feetTometer;
-        return altpress-altpressDes;
+        return Math.abs(altpress-altpressDes);
     }
 
     public void showErrorMessage(CharSequence text){

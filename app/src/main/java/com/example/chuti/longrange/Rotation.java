@@ -141,7 +141,7 @@ public class Rotation extends Activity implements SensorEventListener {
 
                 DefaultHttpClient client = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(url);
-                httpGet.setHeader("Cookie", "AIROS_SESSIONID=e10475e926c0fce15df26bf7aa7d94f6; path=/; domain=192.168.1.20; Expires=Tue Jan 19 2038 03:14:07 GMT+0700 (SE Asia Standard Time);");
+                httpGet.setHeader("Cookie", "AIROS_SESSIONID=2ca526d0b45c06278ef40cbf9520ea56; path=/; domain=192.168.1.20; Expires=Tue Jan 19 2038 03:14:07 GMT+0700 (SE Asia Standard Time);");
                 try {
 
                     HttpResponse execute = client.execute(httpGet);

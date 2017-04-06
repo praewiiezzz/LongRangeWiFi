@@ -29,6 +29,9 @@
         <activity android:name=".Rotation"
             android:label="Installation"
             />
+        <activity android:name=".Test"
+            android:label="Test"
+            />
     </application>
 
 </manifest>
