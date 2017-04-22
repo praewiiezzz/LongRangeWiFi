@@ -176,7 +176,7 @@ public class Rotation extends Activity implements SensorEventListener {
                 textView.setText("Signal : "+signal +" dBm");
             } catch (JSONException e) {
                 e.printStackTrace();
-                textView.setText("Can't connecting to server \nPlease try again later");
+                textView.setText("Can't connecting to server.");
             }
         }
     }
@@ -205,7 +205,7 @@ public class Rotation extends Activity implements SensorEventListener {
     public void calculateAngle(){
         double angle = Math.toDegrees(Math.atan2(height, distance));
         Log.v("Angle",String.valueOf(angle));
-        ((TextView)findViewById(R.id.angle)).setText("มุมของจาน : " + String.format("%.1f",angle));
+        ((TextView)findViewById(R.id.angle)).setText("Alignment : " + String.format("%.1f",angle));
     }
 
 }

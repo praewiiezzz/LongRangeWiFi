@@ -32,6 +32,9 @@
         <activity android:name=".Test"
             android:label="Test"
             />
+        <activity android:name=".Horizontal"
+            android:label="Test"
+            />
     </application>
 
 </manifest>
