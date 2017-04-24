@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2826ffa1">
 
 
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="300dp"
+        android:maxHeight="300dp"
+        android:padding="22dp"
         android:id="@+id/ic_launcher.png"
         android:src="@drawable/dish"
-        android:layout_below="@+id/TextView01"
-        android:layout_alignEnd="@+id/TextView01" />
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/roll"
@@ -23,12 +30,15 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:text="Angle:"
+        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:textColor="#2c97de"
-        android:textSize="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/buttonTest"
-        android:layout_alignStart="@+id/angle" />
+        android:textColor="#ec004a0e"
+        android:textSize="25dp"
+        android:textIsSelectable="false"
+        android:layout_above="@+id/buttonTest"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="#9affbe" />
 
 
 
@@ -41,31 +51,37 @@
         android:id="@+id/buttonTest"
         android:layout_gravity="left"
         android:textSize="12dp"
-        android:layout_alignBottom="@+id/ic_launcher.png"
-        android:layout_alignEnd="@+id/angle"
-        android:layout_marginBottom="28dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading ..."
+        android:gravity="center"
         android:id="@+id/TextView01"
-        android:textColor="#0c49b3"
-        android:textSize="40dp"
+        android:textColor="#fff6ee"
+        android:textSize="25dp"
+        android:autoText="false"
+        android:background="#8a0092ff"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/angle"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/buttonTest"
+        android:layout_above="@+id/ic_launcher.png" />
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Alignment"
+        android:text="   Alignment"
+        android:gravity="center"
+        android:textColor="#d70008ff"
         android:id="@+id/angle"
-        android:textSize="30dp"
-        android:textColor="#2beaff"
-        android:layout_below="@+id/roll"
-        android:layout_alignEnd="@+id/ic_launcher.png" />
+        android:textSize="25dp"
+        android:background="#f4fff5"
+        android:layout_alignEnd="@+id/ic_launcher.png"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

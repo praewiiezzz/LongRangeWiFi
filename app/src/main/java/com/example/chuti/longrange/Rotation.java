@@ -205,6 +205,7 @@ public class Rotation extends Activity implements SensorEventListener {
     public void calculateAngle(){
         double angle = Math.toDegrees(Math.atan2(height, distance));
         Log.v("Angle",String.valueOf(angle));
+        angle = 12;
         ((TextView)findViewById(R.id.angle)).setText("Alignment : " + String.format("%.1f",angle));
     }
 
