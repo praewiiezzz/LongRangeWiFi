@@ -2,161 +2,165 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#E4F1FE">
+    android:background="#5e7cffad"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="74dp"
+        android:text="Current Location"
+        android:layout_column="0"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#1e0b11"
+        android:autoText="false"
+        android:clickable="true"
+        android:background="#00eab5" />
 
 
     <TableRow
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Location"
+            android:text=" Latitude"
             android:layout_column="0"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textIsSelectable="true"
-            android:textColor="#1F3A93" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Latitude"
-            android:layout_column="0"
-            android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="25dp"
             android:id="@+id/text3"
-            android:layout_marginTop="20dp" />
+            android:textColor="#184eff" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Longitude"
             android:layout_column="1"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:layout_marginTop="20dp" />
+            android:textSize="25dp"
+            android:textColor="#184eff" />
     </TableRow>
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/Latitude"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="Latitude"
+            android:layout_height="50dp"
             android:layout_column="0"
             android:layout_weight="1"
-            android:textColor="#2574A9"
-            android:textSize="20dp"
-            android:singleLine="true"
-            android:background="#8de3f6" />
+            android:textColor="#f8fffe"
+            android:textSize="25dp"
+            android:singleLine="false"
+            android:background="#456ff6"
+            android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/Longitude"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="Longitude"
+            android:layout_height="50dp"
             android:layout_column="1"
             android:layout_weight="1"
-            android:textColor="#2574A9"
-            android:textSize="20dp"
-            android:background="#8de3f6" />
+            android:textColor="#f8fcff"
+            android:textSize="25dp"
+            android:background="#4670f6" />
 
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+    <TextView
+            android:layout_width="65dp"
+            android:layout_height="68dp"
             android:text="Enter your destination"
-            android:layout_column="7"
+            android:layout_column="1"
             android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:textSize="25dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#1F3A93" />
-    </TableRow>
+            android:textIsSelectable="true"
+            android:textColor="#200d19"
+        android:autoText="false"
+        android:background="#00ffee" />
+
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/table1">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Latitude"
-            android:layout_column="3"
-            android:layout_weight="1"
-            android:layout_marginTop="25dp"
-            android:textSize="20dp"
-            android:textColor="#34495e" />
+            android:text=" Latitude"
+            android:layout_column="0"
+            android:textSize="25dp"
+            android:textColor="#184eff" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Longitude"
-            android:layout_column="3"
-            android:layout_weight="1"
-            android:layout_marginTop="25dp"
-            android:textSize="20dp"
-            android:textColor="#34495e" />
+            android:text="   Longitude"
+            android:textSize="25dp"
+
+            android:textColor="#184eff" />
     </TableRow>
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:id="@+id/table2"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="30dp">
 
         <EditText
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
             android:inputType="numberDecimal"
-            android:ems="10"
             android:id="@+id/LatitudeEdit"
-            android:layout_column="9"
-            android:background="#8de3f6"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="15dp" />
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:background="#4670f6"
+            android:textIsSelectable="false"
+            android:textSize="25dp"
+            android:textColor="#f9f8ff" />
 
         <EditText
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
             android:inputType="numberDecimal"
-            android:ems="10"
             android:id="@+id/LongitudeEdit"
-            android:background="#8de3f6"
-            android:layout_column="11"
-            android:layout_marginRight="10dp" />
+            android:background="#4771f6"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:textColor="#fdfffa" />
     </TableRow>
 
     <Button
 
-        android:text="Next"
-        android:id="@+id/button3"
-        android:layout_marginTop = "100dp"
-        android:layout_weight="1"
-        android:layout_height="18dp"/>
+            android:text="Next"
+            android:id="@+id/button3"
+            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:background="#00f11c"
+            android:layout_column="1"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="50dp" />
 
 
 </TableLayout>

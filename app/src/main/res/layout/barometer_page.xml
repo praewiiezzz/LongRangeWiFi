@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#39010100">
 
-    <TextView android:id="@+id/text" android:text="Current Pressure (mbar)"
+    <TextView android:id="@+id/text"
+        android:text="Current Pressure (mbar)"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"/>
+        android:layout_height="65dp"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:textStyle="bold"
+        android:background="#ff6a73"
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-    <LinearLayout android:id="@+id/l1"
+    <TextView
+        android:id="@+id/pressTxt"
         android:layout_width="160dp"
         android:layout_height="60dp"
-        android:background="#d3e4f4"
-        android:layout_marginLeft="20dp"
-        android:weightSum="1"
-        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal"
+        style="@style/pressStyle"
+        android:textColor="#0a10ff"
+        android:background="#ddfde3a7"
+        android:autoText="false"
         android:layout_below="@+id/text"
-        android:layout_alignEnd="@+id/text">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:id="@+id/pressTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            style="@style/pressStyle" />
 
-    </LinearLayout>
-
-    <TextView android:id="@+id/text2" android:text="Destination Pressure (mbar)"
+    <TextView
+        android:id="@+id/text2"
+        android:text="Destination Pressure (mbar)"
         style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_weight="3.33"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#29cae9"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:inputType="numberDecimal"
-        android:ems="10"
         android:id="@+id/pressureEdit"
-        android:background="#d3e4f4"
+        android:background="#a6fdde"
         style="@style/pressStyle"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/l1"
-        android:autoText="true"
-        android:elegantTextHeight="true" />
+        android:autoText="false"
+        android:elegantTextHeight="true"
+        android:layout_below="@+id/text2"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true"
+        android:gravity="center|center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -58,5 +68,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="34dp"
-        android:layout_marginBottom="27dp" />
+        android:layout_marginBottom="27dp"
+        android:background="#38d6f4" />
+
 </RelativeLayout>
