@@ -53,6 +53,7 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.horizontal_page);
         receiveValue();  // add
+        receive();
         //
         image = (ImageView) findViewById(R.id.rotateImage);
         done = (ImageView)findViewById(R.id.done);
@@ -83,13 +84,15 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
         // Test callDegree //
         ///
-
+      //  latitudeValCurrent=13.8462463;
+      //          longitudeValCurrent=100.5686871;
+      //  latitudeValDes=13.845012;
+       //         longitudeValDes=100.566210;
         double[] positionA = {latitudeValCurrent,longitudeValCurrent};
         double[] positionB = {latitudeValDes,longitudeValDes};
         //double[] positionB = {13.776092, 100.513573};
         //double[] positionA= {13.776827, 100.514619};
 
-        System.out.println(latitudeValDes);
 
         //an = 120; //120 degree
         //bn = 30 ; //30 degree
@@ -135,7 +138,8 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
         // get the angle around the z-axis rotated
         float degree = Math.round(event.values[0]);
-        degree = calibrateDegree(degree);
+        degree = calibrateDegree(degree)+(float)heading;
+        degree %=360;
 
         total = heading+angle;
         total%=360;
@@ -266,10 +270,17 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
     }
 
     public void receive() {
-        String latitudeValCurrent = getIntent().getStringExtra("latitudeValCurrent");
-        String longitudeValCurrent = getIntent().getStringExtra("longitudeValCurrent");
-        String latitudeValDes= getIntent().getStringExtra("latitudeValDes");
-        String longitudeValDes = getIntent().getStringExtra("longitudeValDes");
+        latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
+
+        //////////// degub
+        Log.v("Distance5 : m ", String.valueOf(distance));
+        Log.v("latitudeValCurrent5", String.valueOf(latitudeValCurrent));
+        Log.v("longitudeValCurrent5", String.valueOf(longitudeValCurrent));
+        Log.v("latitudeValDes5", String.valueOf(latitudeValDes));
+        Log.v("longitudeValDes5", String.valueOf(longitudeValDes));
     }
 }
 
