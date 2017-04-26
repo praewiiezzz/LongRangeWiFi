@@ -46,26 +46,35 @@ public class Rotation extends Activity implements SensorEventListener {
     private static final int FROM_RADS_TO_DEGS = -57;
     private double distance2;
     private Button mButton;
+    private Button exitButton;
     private float pitch;
     private float roll;
     private float azimuth;
     private int pitchSetZero;
     private float setZero = 0;
     private TextView textView;
+    private TextView textView2;
     private double distance;
     private double height;
+    private double signalVal;
+    private double angle;
+    private double bestAngle;
+    private double max;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rotation_page);
-        mButton = (Button)findViewById(R.id.buttonTest);
+        mButton = (Button) findViewById(R.id.buttonTest);
         textView = (TextView) findViewById(R.id.TextView01);
-
+        textView2 = (TextView) findViewById(R.id.best);
+        exitButton = (Button) findViewById(R.id.exitbutton);
         receiveValuefromBarometer();
 
         //run readWebpage every seconds
         new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 readWebpage();
 
             }
@@ -79,6 +88,8 @@ public class Rotation extends Activity implements SensorEventListener {
         } catch (Exception e) {
             Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
         }
+
+
 
         mButton.setOnClickListener(
                 new View.OnClickListener()
@@ -177,6 +188,18 @@ public class Rotation extends Activity implements SensorEventListener {
                 String rssi = jsonObj.getJSONObject("wireless").get("rssi").toString();
 
                 textView.setText("Signal : "+signal +" dBm");
+                signalVal = Double.parseDouble(signal);
+                System.out.print("Signal" + signalVal);
+               /* max = -100;
+                bestAngle = 0;
+                if(signalVal > max)
+                {
+                    max = signalVal;
+                    bestAngle = angle;
+                }*/
+               // ((TextView2)findViewById(R.id.best)).setText("Alignment : " + String.format("%.1f",angle));
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 textView.setText("Can't connecting to server.");
@@ -200,15 +223,16 @@ public class Rotation extends Activity implements SensorEventListener {
     public void receiveValuefromBarometer(){
         distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
         height = Double.valueOf(getIntent().getStringExtra("height"));
-        Log.v("distance",String.valueOf(distance));
-        Log.v("height", String.valueOf(height));
+        Log.v("distance6",String.valueOf(distance));
+        Log.v("height6", String.valueOf(height));
         calculateAngle();
     }
 
     public void calculateAngle(){
-        double angle = Math.toDegrees(Math.atan2(height, distance));
+        angle = Math.toDegrees(Math.atan2(height, distance));
         Log.v("Angle",String.valueOf(angle));
-        ((TextView)findViewById(R.id.angle)).setText("Alignment : " + String.format("%.1f",angle));
+        ((TextView) findViewById(R.id.angle)).setText("Alignment : " + String.format("%.1f", angle));
+        //textView2.setText("Best signal : " +max+" dBm, Angle "+String.format("%.1f",bestAngle));
     }
 
 }

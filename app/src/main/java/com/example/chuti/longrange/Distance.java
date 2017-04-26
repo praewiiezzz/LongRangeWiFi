@@ -142,11 +142,11 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     }
 
     public void printDebug(){
-        Log.v("Distance : m ", distance.toString());
-        Log.v("latitudeValCurrent", latitudeValCurrent.toString());
-        Log.v("longitudeValCurrent", longitudeValCurrent.toString());
-        Log.v("latitudeValDes", latitudeValDes.toString());
-        Log.v("longitudeValDes", longitudeValDes.toString());
+        Log.v("Distance2 : m ", distance.toString());
+        Log.v("latitudeValCurrent2", latitudeValCurrent.toString());
+        Log.v("longitudeValCurrent2", longitudeValCurrent.toString());
+        Log.v("latitudeValDes2", latitudeValDes.toString());
+        Log.v("longitudeValDes2", longitudeValDes.toString());
     }
 
     public void getCoordinates(){

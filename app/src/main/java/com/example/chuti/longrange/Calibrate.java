@@ -97,21 +97,28 @@ public class Calibrate extends Activity implements SensorEventListener {
 
     public void passingValueAndCallNextPage(){
         //Passing value from Distance.java
+        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
 
-        String latitudeValCurrent = getIntent().getStringExtra("latitudeValCurrent");
-        String longitudeValCurrent = getIntent().getStringExtra("longitudeValCurrent");
-        String latitudeValDes= getIntent().getStringExtra("latitudeValDes");
-        String longitudeValDes = getIntent().getStringExtra("longitudeValDes");
-
+        //////////// degub
+        Log.v("latitudeValCurrent3", String.valueOf(latitudeValCurrent));
+        Log.v("longitudeValCurrent3", String.valueOf(longitudeValCurrent));
+        Log.v("latitudeValDes3", String.valueOf(latitudeValDes));
+        Log.v("longitudeValDes3", String.valueOf(longitudeValDes));
+        ///////////////////
         Intent intent = new Intent(Calibrate.this, Heading.class);
         intent.putExtra("CalibrateVal", String.valueOf(degree)); //want to sent -degree
         intent.putExtra("distanceVal",String.valueOf(distance));
-        intent.putExtra("height",String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
-        intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
-        intent.putExtra("latitudeValDes", latitudeValDes.toString());
-        intent.putExtra("longitudeValDes", longitudeValDes.toString());
+        intent.putExtra("height", String.valueOf(height));
+        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
+        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
+        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
+        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
         startActivity(intent);
+
+
     }
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();
@@ -124,6 +131,13 @@ public class Calibrate extends Activity implements SensorEventListener {
     public void receiveValuefromBarometer(){
         distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
         height = Double.valueOf(getIntent().getStringExtra("height"));
+
+        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
+
+
         //Log.v("distance", String.valueOf(distance));
         //Log.v("height", String.valueOf(height));
         //calculateAngle();

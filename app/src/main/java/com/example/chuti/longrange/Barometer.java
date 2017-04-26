@@ -40,29 +40,24 @@ public class Barometer extends Activity implements SensorEventListener {
         mButton = (Button)findViewById(R.id.buttonNext);
 
         mButton.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
                         try {
                             pressureDes = Double.parseDouble(pressureEd.getText().toString());
-                        }
-                        catch(Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         // Call Next page
-                        try{
-                            if(pressureDes != 0 && pressureEd != null) {
-                                height = Double.parseDouble(String.format("%.2f",altpress(pressure, pressureDes)));
+                        try {
+                            if (pressureDes != 0 && pressureEd != null) {
+                                height = Double.parseDouble(String.format("%.2f", altpress(pressure, pressureDes)));
                                 Log.v("pressureDes", pressureDes.toString());
                                 Log.v("Height", String.valueOf(height));
                                 passingValueAndCallNextPage();
-                            }
-                            else {
+                            } else {
                                 showErrorMessage("Enter destination pressure");
                             }
-                        }
-                        catch(Exception e){
+                        } catch (Exception e) {
                             showErrorMessage("An error occured, please try again later.");
 
                         }
@@ -133,19 +128,28 @@ public class Barometer extends Activity implements SensorEventListener {
 
     public void passingValueAndCallNextPage(){
         //Passing value from Distance.java
-        String distance = getIntent().getStringExtra("distanceValue");
-        String latitudeValCurrent = getIntent().getStringExtra("latitudeValCurrent");
-        String longitudeValCurrent = getIntent().getStringExtra("longitudeValCurrent");
-        String latitudeValDes= getIntent().getStringExtra("latitudeValDes");
-        String longitudeValDes = getIntent().getStringExtra("longitudeValDes");
+        double distance = Double.parseDouble(getIntent().getStringExtra("distanceValue"));
+        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
         Intent intent = new Intent(Barometer.this, Calibrate.class);
         //String eiei = "test";
-        intent.putExtra("distanceVal",distance.toString());
+        intent.putExtra("distanceVal",String.valueOf(distance));
         intent.putExtra("height",String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
-        intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
-        intent.putExtra("latitudeValDes", latitudeValDes.toString());
-        intent.putExtra("longitudeValDes", longitudeValDes.toString());
+        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
+        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
+        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
+        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
         startActivity(intent);
+
+
+        //////////// degub
+        Log.v("Distance2 : m ", String.valueOf(distance));
+        Log.v("latitudeValCurrent2", String.valueOf(latitudeValCurrent));
+        Log.v("longitudeValCurrent2", String.valueOf(longitudeValCurrent));
+        Log.v("latitudeValDes2", String.valueOf(latitudeValDes));
+        Log.v("longitudeValDes2", String.valueOf(longitudeValDes));
     }
+
 }

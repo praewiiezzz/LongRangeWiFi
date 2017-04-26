@@ -90,8 +90,6 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
        //         longitudeValDes=100.566210;
         double[] positionA = {latitudeValCurrent,longitudeValCurrent};
         double[] positionB = {latitudeValDes,longitudeValDes};
-        //double[] positionB = {13.776092, 100.513573};
-        //double[] positionA= {13.776827, 100.514619};
 
 
         //an = 120; //120 degree

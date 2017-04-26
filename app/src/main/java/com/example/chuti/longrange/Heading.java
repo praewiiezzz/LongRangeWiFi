@@ -99,22 +99,29 @@ public class Heading extends Activity implements SensorEventListener {
 
     public void passingValueAndCallNextPage(){
         //Passing value from Distance.java
-        String latitudeValCurrent = getIntent().getStringExtra("latitudeValCurrent");
-        String longitudeValCurrent = getIntent().getStringExtra("longitudeValCurrent");
-        String latitudeValDes= getIntent().getStringExtra("latitudeValDes");
-        String longitudeValDes = getIntent().getStringExtra("longitudeValDes");
+        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
 
         Intent intent = new Intent(Heading.this, RotateHorizontal.class);
         intent.putExtra("CurrentHeading",String.valueOf(realHeading)); // currentDegree = -degree want to send degree
         intent.putExtra("CalibrateVal", String.valueOf(calibrate));
         intent.putExtra("distanceVal",String.valueOf(distance));
         intent.putExtra("height",String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
-        intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
-        intent.putExtra("latitudeValDes", latitudeValDes.toString());
-        intent.putExtra("longitudeValDes", longitudeValDes.toString());
+        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
+        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
+        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
+        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
         System.out.println("CurrentHeading " + realHeading);
         startActivity(intent);
+
+        //////////// degub
+        Log.v("Distance4 : m ", String.valueOf(distance));
+        Log.v("latitudeValCurrent4", String.valueOf(latitudeValCurrent));
+        Log.v("longitudeValCurrent4", String.valueOf(longitudeValCurrent));
+        Log.v("latitudeValDes4", String.valueOf(latitudeValDes));
+        Log.v("longitudeValDes4", String.valueOf(longitudeValDes));
     }
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();

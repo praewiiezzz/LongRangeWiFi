@@ -83,5 +83,30 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="exit"
+        android:visibility="invisible"
+        android:id="@+id/exitbutton"
+        android:layout_below="@+id/pitch"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best : "
+        android:visibility="invisible"
+        android:id="@+id/best"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/exitbutton"
+        android:background="#3cff02"
+        android:textColor="#fffdfd"
+        android:layout_alignTop="@+id/exitbutton" />
+
 
 </RelativeLayout>
