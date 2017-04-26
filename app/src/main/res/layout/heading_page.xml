@@ -1,0 +1,54 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativelayout"
+    android:padding="22dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d5f3f6">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Place the device over the antenna."
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:id="@+id/textView"
+        android:textColor="#ec0f2c4a"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/tvHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="Heading: 0.0"
+
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/smartphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/satellite_platform"
+        android:adjustViewBounds="true"
+        android:maxWidth="300dp"
+        android:maxHeight="300dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="OK"
+        android:id="@+id/okButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="#38d6f4" />
+
+
+
+</RelativeLayout>

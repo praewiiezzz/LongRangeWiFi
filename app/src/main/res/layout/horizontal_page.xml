@@ -1,22 +1,78 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff" >
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativelayout"
+    android:padding="22dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/tvHeading"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Heading: 0.0" />
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:textStyle="bold"
+        android:id="@+id/angleSuggest"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
-        android:id="@+id/imageViewCompass"
+        android:id="@+id/rotateImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvHeading"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/img_compass" />
+        android:src="@drawable/notched_compass"
+        android:adjustViewBounds="true"
+        android:maxWidth="200dp"
+        android:maxHeight="200dp"
+        android:scaleType="fitCenter"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="0.0"
+        android:gravity="center"
+        android:textColor="#ff5b7d"
+        android:textSize="35dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Total angle : "
+        android:textStyle="bold"
+        android:id="@+id/totalAngle"
+        android:gravity="center"
+        android:layout_above="@+id/rotateImage"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/done"
+        android:src="@drawable/done"
+        android:visibility="invisible"
+        android:adjustViewBounds="true"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="Next"
+        android:id="@+id/nextButton"
+        android:textColor="#ffffff"
+        android:background="#35aecc"
+        android:layout_alignBottom="@+id/done"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

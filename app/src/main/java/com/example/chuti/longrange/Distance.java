@@ -164,7 +164,13 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
             Intent intent = new Intent(Distance.this, Barometer.class);
             //String eiei = "test";
             intent.putExtra("distanceValue",distance.toString());
+            intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
+            intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
+            intent.putExtra("latitudeValDes", latitudeValDes.toString());
+            intent.putExtra("longitudeValDes", longitudeValDes.toString());
+
             startActivity(intent);
+
 
             //startActivity(new Intent(Distance.this, Barometer.class));
         }
@@ -180,5 +186,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
+
 
 }

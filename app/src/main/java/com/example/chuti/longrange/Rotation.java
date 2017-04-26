@@ -54,20 +54,13 @@ public class Rotation extends Activity implements SensorEventListener {
     private TextView textView;
     private double distance;
     private double height;
-
-    // define the display assembly compass picture
-    private ImageView image;
-
-    // record the compass picture angle turned
-    private float currentDegree = 0f;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rotation_page);
         mButton = (Button)findViewById(R.id.buttonTest);
         textView = (TextView) findViewById(R.id.TextView01);
-        image = (ImageView) findViewById(R.id.longrange_png);
+
         receiveValuefromBarometer();
 
         //run readWebpage every seconds
@@ -95,7 +88,7 @@ public class Rotation extends Activity implements SensorEventListener {
 
                         try{
                             setZero = - pitch;
-                            startActivity(new Intent(Rotation.this, Test.class));
+                            //startActivity(new Intent(Rotation.this, Test.class));
                         }
                         catch(Exception e){
                            showErrorMessage("Error");
@@ -138,23 +131,6 @@ public class Rotation extends Activity implements SensorEventListener {
         azimuth = orientation[0] * FROM_RADS_TO_DEGS;
         ((TextView)findViewById(R.id.pitch)).setText("Angle: " + pitchSetZero);
         //((TextView)findViewById(R.id.roll)).setText("Roll: "+roll+ "  Azimuth"+azimuth);
-
-        RotateAnimation ra = new RotateAnimation(
-                currentDegree,
-                -pitchSetZero,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f);
-
-        // how long the animation will take place
-        ra.setDuration(210);
-
-        // set the animation after the end of the reservation status
-        ra.setFillAfter(true);
-
-        // Start the animation
-        image.startAnimation(ra);
-        currentDegree = -pitchSetZero;
 
 
     }

@@ -32,8 +32,14 @@
         <activity android:name=".Test"
             android:label="Test"
             />
-        <activity android:name=".Horizontal"
-            android:label="Test"
+        <activity android:name=".RotateHorizontal"
+            android:label="Installation"
+            />
+        <activity android:name=".Calibrate"
+            android:label="Calibrate the compass"
+            />
+        <activity android:name=".Heading"
+            android:label="Installation"
             />
     </application>
 

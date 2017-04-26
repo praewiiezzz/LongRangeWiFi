@@ -13,8 +13,8 @@
         android:maxWidth="300dp"
         android:maxHeight="300dp"
         android:padding="22dp"
-        android:id="@+id/ic_launcher.png"
-        android:src="@drawable/dish"
+        android:id="@+id/longrange"
+        android:src="@drawable/satellite_platform2"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/roll" />
 
@@ -35,7 +35,7 @@
         android:textSize="25dp"
         android:textIsSelectable="false"
         android:background="#9affbe"
-        android:layout_below="@+id/ic_launcher.png"
+        android:layout_below="@+id/longrange"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/buttonTest" />
 
@@ -52,7 +52,7 @@
         android:textSize="12dp"
         android:background="#ff336d"
         android:layout_alignTop="@+id/pitch"
-        android:layout_alignEnd="@+id/ic_launcher.png" />
+        android:layout_alignEnd="@+id/longrange" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         android:autoText="false"
         android:background="#8a0092ff"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/ic_launcher.png"
+        android:layout_above="@+id/longrange"
         android:layout_below="@+id/angle"
         android:gravity="center"
         android:layout_alignParentEnd="true" />

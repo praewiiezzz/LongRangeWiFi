@@ -134,10 +134,18 @@ public class Barometer extends Activity implements SensorEventListener {
     public void passingValueAndCallNextPage(){
         //Passing value from Distance.java
         String distance = getIntent().getStringExtra("distanceValue");
-        Intent intent = new Intent(Barometer.this, Rotation.class);
+        String latitudeValCurrent = getIntent().getStringExtra("latitudeValCurrent");
+        String longitudeValCurrent = getIntent().getStringExtra("longitudeValCurrent");
+        String latitudeValDes= getIntent().getStringExtra("latitudeValDes");
+        String longitudeValDes = getIntent().getStringExtra("longitudeValDes");
+        Intent intent = new Intent(Barometer.this, Calibrate.class);
         //String eiei = "test";
         intent.putExtra("distanceVal",distance.toString());
         intent.putExtra("height",String.valueOf(height));
+        intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
+        intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
+        intent.putExtra("latitudeValDes", latitudeValDes.toString());
+        intent.putExtra("longitudeValDes", longitudeValDes.toString());
         startActivity(intent);
     }
 }
