@@ -225,6 +225,7 @@ public class Rotation extends Activity implements SensorEventListener {
         height = Double.valueOf(getIntent().getStringExtra("height"));
         Log.v("distance6",String.valueOf(distance));
         Log.v("height6", String.valueOf(height));
+        Log.v("Distance frome dist", String.valueOf(((MyApplication) this.getApplication()).getDistance()));
         calculateAngle();
     }
 
