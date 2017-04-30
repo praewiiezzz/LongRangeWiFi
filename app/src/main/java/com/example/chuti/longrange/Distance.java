@@ -128,12 +128,9 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     }
 
     public double meterDistanceBetweenPoints(double lat_a, double lng_a, double lat_b, double lng_b) {
-        double pk = (double) (180.0/Math.PI);
-
+        double pk = 180.0/Math.PI;
         double a1 = Math.toRadians(lat_a);
-        double a2 = Math.toRadians(lng_a);
         double b1 = Math.toRadians(lat_b);
-        double b2 = Math.toRadians(lng_b);
         double dq= (lat_b-lat_a) /pk;
         double dl = (lng_b-lng_a) / pk;
         double a = Math.sin(dq / 2)* Math.sin(dq / 2)+Math.cos(a1)*Math.cos(b1)*Math.sin(dl / 2)*Math.sin(dl / 2);
@@ -155,6 +152,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
         longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
         distance = Double.parseDouble(String.format("%.4f",meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
+        ((MyApplication) this.getApplication()).setDistance(distance);
     }
 
     public void callNextActivity(){

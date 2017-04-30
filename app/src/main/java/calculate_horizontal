@@ -1,0 +1,58 @@
+public class calculate_horizontal {
+
+    public static void main(String[] args) {
+        double latA ;
+        double lonA ;
+        double latB ;
+        double lonB ;
+        double an ;
+        double bn ;
+        double rotAng ;
+        //	double[] positionA = {latA, lonA};
+        //	double[] positionB = {latB, lonB};
+        double[] positionA = {13.8462463, 100.5686871};
+        double[] positionB = {13.776092, 100.513573};
+        bn = 120; //120 degree
+        an = 30 ; //30 degree
+        double difX = positionB[0] - positionA[0];
+        double difY = positionB[1] - positionA[1];
+
+        rotAng = Math.toDegrees(Math.atan2(difX,difY));
+        System.out.println(rotAng);
+        calDegree(positionA[0],positionB[0],positionA[1],positionB[1],an,bn,rotAng);
+
+    }
+    static void calDegree(double latA, double latB,double lonA,double lonB,double an,double bn,double z)
+    {
+        double a=0,b=0 ;
+        double pi = 180;
+        System.out.println("z: "+z);
+        if(latA > latB && lonA > lonB)
+        {
+            System.out.println("a left bot, b right top");
+            a = (-an + pi + pi/2 - z) ;
+            b = (-bn + pi/2 - z) ;
+        }
+        else if(latA > latB && lonA < lonB)
+        {	System.out.println("a left bot, b right top");
+            a = (-an + pi/2 + z) ;
+            b = (-bn + pi + pi/2 + z) ;
+        }
+        else if(latA < latB && lonA > lonB)
+        {
+            System.out.println("a right bot, b left top");
+            a = (-an + pi + pi/2 + z) ;
+            b = (-bn + pi/2 + z) ;
+        }
+        else if(latA < latB && lonA < lonB)
+        {	System.out.println("a right top, b left bot");
+            a = (-an + pi/2 - z);
+            b = (-bn + pi + pi/2 - z) ;
+        }
+        // - is counter-clockwise, + is clockwise
+        System.out.println("a "+(a));  // มุมที่ต้องหมุนไปจากจุดเดิม หรือ heading เดิม  + คือตามเข็ม - คือทวนเข็ม
+        System.out.println("b"+(b)); // เป็นของปลายทาง ซึ่งไม่ใช้
+    }
+
+}
+

@@ -132,10 +132,6 @@ public class Calibrate extends Activity implements SensorEventListener {
         distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
         height = Double.valueOf(getIntent().getStringExtra("height"));
 
-        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
 
 
         //Log.v("distance", String.valueOf(distance));

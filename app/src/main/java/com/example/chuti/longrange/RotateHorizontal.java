@@ -53,7 +53,6 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.horizontal_page);
         receiveValue();  // add
-        receive();
         //
         image = (ImageView) findViewById(R.id.rotateImage);
         done = (ImageView)findViewById(R.id.done);
@@ -189,6 +188,17 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
         heading = Double.valueOf(getIntent().getStringExtra("CurrentHeading"));
         distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
         height = Double.valueOf(getIntent().getStringExtra("height"));
+        latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
+        longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
+        latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
+        longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
+
+        //////////// degub
+        Log.v("Distance5 : m ", String.valueOf(distance));
+        Log.v("latitudeValCurrent5", String.valueOf(latitudeValCurrent));
+        Log.v("longitudeValCurrent5", String.valueOf(longitudeValCurrent));
+        Log.v("latitudeValDes5", String.valueOf(latitudeValDes));
+        Log.v("longitudeValDes5", String.valueOf(longitudeValDes));
         Log.v("Calibrate value 2", String.valueOf(calibrate));
         Log.v("oldHeading 2", String.valueOf(heading));
     }
@@ -259,7 +269,6 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
         Intent intent = new Intent(RotateHorizontal.this, Rotation.class);
      //   intent.putExtra("CurrentHeading",String.valueOf(realHeading)); // currentDegree = -degree want to send degree
-        intent.putExtra("CalibrateVal", String.valueOf(calibrate));
         intent.putExtra("distanceVal",String.valueOf(distance));
         intent.putExtra("height", String.valueOf(height));
 
@@ -267,18 +276,6 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
         startActivity(intent);
     }
 
-    public void receive() {
-        latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
 
-        //////////// degub
-        Log.v("Distance5 : m ", String.valueOf(distance));
-        Log.v("latitudeValCurrent5", String.valueOf(latitudeValCurrent));
-        Log.v("longitudeValCurrent5", String.valueOf(longitudeValCurrent));
-        Log.v("latitudeValDes5", String.valueOf(latitudeValDes));
-        Log.v("longitudeValDes5", String.valueOf(longitudeValDes));
-    }
 }
 
