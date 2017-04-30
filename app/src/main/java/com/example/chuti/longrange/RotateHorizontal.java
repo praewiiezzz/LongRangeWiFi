@@ -34,7 +34,6 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
     private ImageView image;
     private Button mButton;
     private double distance = 0;
-    private double height = 0;
 
     double latitudeValCurrent = 0;
     double longitudeValCurrent = 0;
@@ -64,7 +63,7 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
                         // Call Next page
 
                         try {
-                           passingValueAndCallNextPage();
+                            passingValueAndCallNextPage();
 
 
                         } catch (Exception e) {
@@ -83,10 +82,10 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
         // Test callDegree //
         ///
-      //  latitudeValCurrent=13.8462463;
-      //          longitudeValCurrent=100.5686871;
-      //  latitudeValDes=13.845012;
-       //         longitudeValDes=100.566210;
+        //  latitudeValCurrent=13.8462463;
+        //          longitudeValCurrent=100.5686871;
+        //  latitudeValDes=13.845012;
+        //         longitudeValDes=100.566210;
         double[] positionA = {latitudeValCurrent,longitudeValCurrent};
         double[] positionB = {latitudeValDes,longitudeValDes};
 
@@ -184,14 +183,13 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
     public void receiveValue()
     {
-        calibrate = Double.valueOf(getIntent().getStringExtra("CalibrateVal"));
-        heading = Double.valueOf(getIntent().getStringExtra("CurrentHeading"));
-        distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
-        height = Double.valueOf(getIntent().getStringExtra("height"));
-        latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
+        calibrate =((MyApplication) this.getApplication()).getCalibrateVal();
+        heading = ((MyApplication) this.getApplication()).getCurrentHeading();
+        distance = ((MyApplication) this.getApplication()).getDistance();
+        latitudeValCurrent = ((MyApplication) this.getApplication()).getlatitudeValCurrent();
+        longitudeValCurrent = ((MyApplication) this.getApplication()).getlongitudeValCurrent();
+        latitudeValDes= ((MyApplication) this.getApplication()).getlatitudeValDes();
+        longitudeValDes = ((MyApplication) this.getApplication()).getlongitudeValDes();
 
         //////////// degub
         Log.v("Distance5 : m ", String.valueOf(distance));
@@ -268,14 +266,11 @@ public class RotateHorizontal extends Activity implements SensorEventListener {
 
 
         Intent intent = new Intent(RotateHorizontal.this, Rotation.class);
-     //   intent.putExtra("CurrentHeading",String.valueOf(realHeading)); // currentDegree = -degree want to send degree
-        intent.putExtra("distanceVal",String.valueOf(distance));
-        intent.putExtra("height", String.valueOf(height));
+        //   intent.putExtra("CurrentHeading",String.valueOf(realHeading)); // currentDegree = -degree want to send degree
 
-      //  System.out.println("CurrentHeading " + realHeading);
+        //  System.out.println("CurrentHeading " + realHeading);
         startActivity(intent);
     }
 
 
 }
-

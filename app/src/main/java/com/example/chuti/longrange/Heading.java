@@ -28,19 +28,17 @@ public class Heading extends Activity implements SensorEventListener {
     // record the compass picture angle turned
     private double calibrate = 0;
     private double realHeading = 0;
-    private double distance = 0;
-    private double height = 0;
     // device sensor manager
     private SensorManager mSensorManager;
 
     TextView tvHeading;
-    Button mButton;
+    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.heading_page);
-
+        calibrate = ((MyApplication) this.getApplication()).getCalibrateVal();
         receiveValue();
 
         // TextView that will tell the user what degree is he heading
@@ -55,10 +53,11 @@ public class Heading extends Activity implements SensorEventListener {
                     public void onClick(View view) {
                         // Call Next page
                         try {
-                            passingValueAndCallNextPage();
+                            //System.out.println("CurrentHeading " + realHeading);
+                            Intent intent = new Intent(Heading.this, RotateHorizontal.class);
+                            startActivity(intent);
                         } catch (Exception e) {
                             showErrorMessage("An error occured, please try again later.");
-
                         }
                     }
                 });
@@ -88,7 +87,9 @@ public class Heading extends Activity implements SensorEventListener {
         float degree = Math.round(event.values[0]);
         degree = calibrateDegree(degree);
         realHeading = degree;
+        ((MyApplication) this.getApplication()).setCurrentHeading(realHeading);
         tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
+        //Log.v("CurrentHead", String.valueOf(String.valueOf(((MyApplication) this.getApplication()).getCurrentHeading())));
 
     }
 
@@ -97,32 +98,11 @@ public class Heading extends Activity implements SensorEventListener {
         // not in use
     }
 
-    public void passingValueAndCallNextPage(){
-        //Passing value from Distance.java
-        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
-
+    public void CallNextPage()
+    {
         Intent intent = new Intent(Heading.this, RotateHorizontal.class);
-        intent.putExtra("CurrentHeading",String.valueOf(realHeading)); // currentDegree = -degree want to send degree
-        intent.putExtra("CalibrateVal", String.valueOf(calibrate));
-        intent.putExtra("distanceVal",String.valueOf(distance));
-        intent.putExtra("height",String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
-        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
-        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
-        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
-        System.out.println("CurrentHeading " + realHeading);
         startActivity(intent);
-
-        //////////// degub
-        Log.v("Distance4 : m ", String.valueOf(distance));
-        Log.v("latitudeValCurrent4", String.valueOf(latitudeValCurrent));
-        Log.v("longitudeValCurrent4", String.valueOf(longitudeValCurrent));
-        Log.v("latitudeValDes4", String.valueOf(latitudeValDes));
-        Log.v("longitudeValDes4", String.valueOf(longitudeValDes));
-    }
+   }
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
@@ -132,24 +112,37 @@ public class Heading extends Activity implements SensorEventListener {
 
     public void receiveValue()
     {
-        calibrate = Double.valueOf(getIntent().getStringExtra("CalibrateVal"));
 
-        distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
-        height = Double.valueOf(getIntent().getStringExtra("height"));
-        Log.v("Calibrate value fc", String.valueOf(calibrate));
+        Log.v("Calibrate value fc", String.valueOf(String.valueOf(((MyApplication) this.getApplication()).getCalibrateVal())));
     }
 
     public float calibrateDegree(float degree)
     {
+
         if(degree < 360)
         {
+            System.out.print("degree "+degree+"calibrate"+calibrate);
+            Log.v("degree before", String.valueOf(degree));
+            Log.v("calibrate val", String.valueOf(calibrate));
             degree = degree +(360-(float)calibrate);
+            Log.v("degree after",String.valueOf(degree));
             degree %=360;
+            Log.v("degree mod",String.valueOf(degree));
         }
         else if( degree == 360)
         {
             degree = degree-(float)calibrate;
         }
         return degree;
+    }
+
+    public void printDebug(){
+        Log.v("Calibrate2n", String.valueOf(((MyApplication) this.getApplication()).getCalibrateVal()));
+        Log.v("Heading2n", String.valueOf(((MyApplication) this.getApplication()).getCurrentHeading()));
+        Log.v("Distance2n : m ", String.valueOf(((MyApplication) this.getApplication()).getDistance()));
+        Log.v("latitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValCurrent()));
+        Log.v("longitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValCurrent()));
+        Log.v("latitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValDes()));
+        Log.v("longitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValDes()));
     }
 }

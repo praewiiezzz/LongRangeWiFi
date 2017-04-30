@@ -20,8 +20,6 @@ public class Calibrate extends Activity implements SensorEventListener {
     // record the compass picture angle turned
     private float currentDegree = 0f;
     private float degree = 0f;
-    private double distance = 0;
-    private double height = 0;
 
     // device sensor manager
     private SensorManager mSensorManager;
@@ -38,9 +36,7 @@ public class Calibrate extends Activity implements SensorEventListener {
 
         // TextView that will tell the user what degree is he heading
         tvHeading = (TextView) findViewById(R.id.tvHeading);
-        receiveValuefromBarometer();
         mButton = (Button)findViewById(R.id.okButton);
-        // receiveValue();
         // initialize your android device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -49,7 +45,9 @@ public class Calibrate extends Activity implements SensorEventListener {
                     public void onClick(View view) {
                         // Call Next page
                         try {
-                            passingValueAndCallNextPage();
+                            shareCurrentDegree();
+                            Log.v("Degree",String.valueOf(degree));
+                            CallNextPage();
                         } catch (Exception e) {
                             showErrorMessage("An error occured, please try again later.");
 
@@ -87,7 +85,7 @@ public class Calibrate extends Activity implements SensorEventListener {
         tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
 
         currentDegree = -degree;
-
+        //TODO create compass
     }
 
     @Override
@@ -95,30 +93,15 @@ public class Calibrate extends Activity implements SensorEventListener {
         // not in use
     }
 
-    public void passingValueAndCallNextPage(){
-        //Passing value from Distance.java
-        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
-
-        //////////// degub
-        Log.v("latitudeValCurrent3", String.valueOf(latitudeValCurrent));
-        Log.v("longitudeValCurrent3", String.valueOf(longitudeValCurrent));
-        Log.v("latitudeValDes3", String.valueOf(latitudeValDes));
-        Log.v("longitudeValDes3", String.valueOf(longitudeValDes));
-        ///////////////////
+    public void CallNextPage(){
         Intent intent = new Intent(Calibrate.this, Heading.class);
-        intent.putExtra("CalibrateVal", String.valueOf(degree)); //want to sent -degree
-        intent.putExtra("distanceVal",String.valueOf(distance));
-        intent.putExtra("height", String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
-        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
-        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
-        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
         startActivity(intent);
+    }
 
-
+    public void shareCurrentDegree()
+    {
+        ((MyApplication) this.getApplication()).setCalibrateVal(degree);
+        Log.v("degree Calibrate",String.valueOf(degree));
     }
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();
@@ -127,15 +110,4 @@ public class Calibrate extends Activity implements SensorEventListener {
         toast.show();
     }
 
-
-    public void receiveValuefromBarometer(){
-        distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
-        height = Double.valueOf(getIntent().getStringExtra("height"));
-
-
-
-        //Log.v("distance", String.valueOf(distance));
-        //Log.v("height", String.valueOf(height));
-        //calculateAngle();
-    }
 }

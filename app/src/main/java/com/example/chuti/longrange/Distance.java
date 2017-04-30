@@ -44,6 +44,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         mLatitudeEditText = (EditText) findViewById(R.id.LatitudeEdit);
         mLongitudeEditText = (EditText) findViewById(R.id.LongitudeEdit);
         mButton = (Button)findViewById(R.id.button3);
+
         mButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
@@ -53,9 +54,14 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        // Call Next page
+                        // Check Enter destination and Call Next page
                         try {
-                            callNextActivity();
+                            if(latitudeValDes != null && longitudeValDes != null) {
+                                callNextActivity();
+                            }
+                            else{
+                                showErrorMessage("Enter destination");
+                            }
 
                         } catch (Exception e) {
                             showErrorMessage("An error occured, please try again later");
@@ -90,14 +96,10 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
             return;
             }
         }
-        lastLocation = LocationServices.FusedLocationApi
-                .getLastLocation(mGoogleApiClient);
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if(lastLocation !=null) {
-            mLatitudeTextView.setText(String.valueOf(
-                    lastLocation.getLatitude()));
-            mLongitudeTextView.setText(String.valueOf(
-                    lastLocation.getLongitude()));
-
+            mLatitudeTextView.setText(String.valueOf(lastLocation.getLatitude()));
+            mLongitudeTextView.setText(String.valueOf(lastLocation.getLongitude()));
         }
         else {
             showErrorMessage("Cannot detect location");
@@ -144,6 +146,12 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         Log.v("longitudeValCurrent2", longitudeValCurrent.toString());
         Log.v("latitudeValDes2", latitudeValDes.toString());
         Log.v("longitudeValDes2", longitudeValDes.toString());
+
+        Log.v("Distance2n : m ", String.valueOf(((MyApplication) this.getApplication()).getDistance()));
+        Log.v("latitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValCurrent()));
+        Log.v("longitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValCurrent()));
+        Log.v("latitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValDes()));
+        Log.v("longitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValDes()));
     }
 
     public void getCoordinates(){
@@ -151,34 +159,28 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         longitudeValCurrent = Double.parseDouble(mLongitudeTextView.getText().toString());
         latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
         longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
-        distance = Double.parseDouble(String.format("%.4f",meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
+        distance = Double.parseDouble(String.format("%.4f", meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
+        shareVariable();
+    }
+
+    public void shareVariable()
+    {
+        ((MyApplication) this.getApplication()).setLatitudeValCurrent(latitudeValCurrent);
+        ((MyApplication) this.getApplication()).setLongitudeValCurrent(longitudeValCurrent);
+        ((MyApplication) this.getApplication()).setLatitudeValDes(latitudeValDes);
+        ((MyApplication) this.getApplication()).setLongitudeValDes(longitudeValDes);
         ((MyApplication) this.getApplication()).setDistance(distance);
     }
 
-    public void callNextActivity(){
-
-        if(latitudeValDes != null && longitudeValDes != null) {
-           //for pass data to next activitity
-            Intent intent = new Intent(Distance.this, Barometer.class);
-            //String eiei = "test";
-            intent.putExtra("distanceValue",distance.toString());
-            intent.putExtra("latitudeValCurrent", latitudeValCurrent.toString());
-            intent.putExtra("longitudeValCurrent", longitudeValCurrent.toString());
-            intent.putExtra("latitudeValDes", latitudeValDes.toString());
-            intent.putExtra("longitudeValDes", longitudeValDes.toString());
-
-            startActivity(intent);
-
-
-            //startActivity(new Intent(Distance.this, Barometer.class));
-        }
-        else{
-            showErrorMessage("Enter destination");
-        }
+    public void callNextActivity()
+    {
+        Intent intent = new Intent(Distance.this, Barometer.class);
+        startActivity(intent);
+        //startActivity(new Intent(Distance.this, Barometer.class));
     }
 
-    public void showErrorMessage(CharSequence text){
-
+    public void showErrorMessage(CharSequence text)
+    {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);

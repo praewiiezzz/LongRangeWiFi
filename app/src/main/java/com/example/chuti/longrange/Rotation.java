@@ -54,8 +54,8 @@ public class Rotation extends Activity implements SensorEventListener {
     private float setZero = 0;
     private TextView textView;
     private TextView textView2;
-    private double distance;
-    private double height;
+    private double distance = 0;
+    private double height = 0;
     private double signalVal;
     private double angle;
     private double bestAngle;
@@ -221,8 +221,8 @@ public class Rotation extends Activity implements SensorEventListener {
     }
 
     public void receiveValuefromBarometer(){
-        distance = Double.valueOf(getIntent().getStringExtra("distanceVal"));
-        height = Double.valueOf(getIntent().getStringExtra("height"));
+        distance = ((MyApplication) this.getApplication()).getDistance();
+        height = ((MyApplication) this.getApplication()).getHeight();
         Log.v("distance6",String.valueOf(distance));
         Log.v("height6", String.valueOf(height));
         Log.v("Distance frome dist", String.valueOf(((MyApplication) this.getApplication()).getDistance()));
@@ -232,6 +232,7 @@ public class Rotation extends Activity implements SensorEventListener {
     public void calculateAngle(){
         angle = Math.toDegrees(Math.atan2(height, distance));
         Log.v("Angle",String.valueOf(angle));
+        Log.v("Heading", String.valueOf(((MyApplication) this.getApplication()).getCurrentHeading()));
         ((TextView) findViewById(R.id.angle)).setText("Alignment : " + String.format("%.1f", angle));
         //textView2.setText("Best signal : " +max+" dBm, Angle "+String.format("%.1f",bestAngle));
     }

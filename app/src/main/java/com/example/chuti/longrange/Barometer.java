@@ -51,9 +51,10 @@ public class Barometer extends Activity implements SensorEventListener {
                         try {
                             if (pressureDes != 0 && pressureEd != null) {
                                 height = Double.parseDouble(String.format("%.2f", altpress(pressure, pressureDes)));
+                                shareVariable();
                                 Log.v("pressureDes", pressureDes.toString());
                                 Log.v("Height", String.valueOf(height));
-                                passingValueAndCallNextPage();
+                                CallNextPage();
                             } else {
                                 showErrorMessage("Enter destination pressure");
                             }
@@ -73,7 +74,10 @@ public class Barometer extends Activity implements SensorEventListener {
     }
 
 
-
+    public void shareVariable()
+    {
+        ((MyApplication) this.getApplication()).setHeight(height);
+    }
     @Override
     protected void onResume() {
 
@@ -83,8 +87,6 @@ public class Barometer extends Activity implements SensorEventListener {
         snsMgr.registerListener(this, pS, SensorManager.SENSOR_DELAY_UI);
     }
 
-
-
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -93,8 +95,6 @@ public class Barometer extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-
     }
 
     @Override
@@ -126,30 +126,11 @@ public class Barometer extends Activity implements SensorEventListener {
         toast.show();
     }
 
-    public void passingValueAndCallNextPage(){
-        //Passing value from Distance.java
-        double distance = Double.parseDouble(getIntent().getStringExtra("distanceValue"));
-        double latitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("latitudeValCurrent"));
-        double longitudeValCurrent = Double.parseDouble(getIntent().getStringExtra("longitudeValCurrent"));
-        double latitudeValDes= Double.parseDouble(getIntent().getStringExtra("latitudeValDes"));
-        double longitudeValDes = Double.parseDouble(getIntent().getStringExtra("longitudeValDes"));
+    public void CallNextPage(){
+
         Intent intent = new Intent(Barometer.this, Calibrate.class);
-        //String eiei = "test";
-        intent.putExtra("distanceVal",String.valueOf(distance));
-        intent.putExtra("height",String.valueOf(height));
-        intent.putExtra("latitudeValCurrent", String.valueOf(latitudeValCurrent));
-        intent.putExtra("longitudeValCurrent", String.valueOf(longitudeValCurrent));
-        intent.putExtra("latitudeValDes", String.valueOf(latitudeValDes));
-        intent.putExtra("longitudeValDes", String.valueOf(longitudeValDes));
         startActivity(intent);
 
-
-        //////////// degub
-        Log.v("Distance2 : m ", String.valueOf(distance));
-        Log.v("latitudeValCurrent2", String.valueOf(latitudeValCurrent));
-        Log.v("longitudeValCurrent2", String.valueOf(longitudeValCurrent));
-        Log.v("latitudeValDes2", String.valueOf(latitudeValDes));
-        Log.v("longitudeValDes2", String.valueOf(longitudeValDes));
     }
 
 }

@@ -14,14 +14,14 @@ public class MyApplication extends Application {
     private double longitudeValDes;
     private double distance;
     private double height;
-    private double calibrateVal;
+    private double calibrateVal = 0;
     private double realHeading;
 
+    //CurrentLocation
     public double getlatitudeValCurrent() {
         return latitudeValCurrent;
     }
 
-    //CurrentLocation
     public void setLatitudeValCurrent(double latitudeValCurrent) {
         this.latitudeValCurrent = latitudeValCurrent;
     }
@@ -80,7 +80,7 @@ public class MyApplication extends Application {
     }
 
     //CurrentHeading
-    public double getCurrentHeadingl() {
+    public double getCurrentHeading() {
         return realHeading;
     }
 
