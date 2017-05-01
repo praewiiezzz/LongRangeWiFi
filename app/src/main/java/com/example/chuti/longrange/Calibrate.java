@@ -37,6 +37,7 @@ public class Calibrate extends Activity implements SensorEventListener {
         // TextView that will tell the user what degree is he heading
         tvHeading = (TextView) findViewById(R.id.tvHeading);
         mButton = (Button)findViewById(R.id.okButton);
+
         // initialize your android device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -103,6 +104,7 @@ public class Calibrate extends Activity implements SensorEventListener {
         ((MyApplication) this.getApplication()).setCalibrateVal(degree);
         Log.v("degree Calibrate",String.valueOf(degree));
     }
+
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

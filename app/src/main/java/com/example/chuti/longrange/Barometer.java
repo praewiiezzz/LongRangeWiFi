@@ -36,8 +36,9 @@ public class Barometer extends Activity implements SensorEventListener {
         setContentView(R.layout.barometer_page);
         pressView = (TextView) findViewById(R.id.pressTxt);
         pressureEd = (EditText) findViewById(R.id.pressureEdit);
-
         mButton = (Button)findViewById(R.id.buttonNext);
+
+        callSensorService();
 
         mButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -65,14 +66,14 @@ public class Barometer extends Activity implements SensorEventListener {
                     }
                 });
 
-        // Look for pressure sensor
+    }
+
+    public void callSensorService() // Look for pressure sensor
+    {
         SensorManager snsMgr = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
         Sensor pS = snsMgr.getDefaultSensor(Sensor.TYPE_PRESSURE);
         snsMgr.registerListener(this, pS, SensorManager.SENSOR_DELAY_UI);
-
-
     }
-
 
     public void shareVariable()
     {

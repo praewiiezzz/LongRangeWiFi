@@ -43,13 +43,14 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         mLongitudeTextView = (TextView) findViewById(R.id.Longitude);
         mLatitudeEditText = (EditText) findViewById(R.id.LatitudeEdit);
         mLongitudeEditText = (EditText) findViewById(R.id.LongitudeEdit);
-        mButton = (Button)findViewById(R.id.button3);
+        mButton = (Button)findViewById(R.id.nextButton);
 
         mButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         try {
                             getCoordinates();
+                            shareVariable();
                             printDebug();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -71,7 +72,9 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
 
 
     }
-    public void requestLocation(){
+
+    public void requestLocation()
+    {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -146,12 +149,6 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         Log.v("longitudeValCurrent2", longitudeValCurrent.toString());
         Log.v("latitudeValDes2", latitudeValDes.toString());
         Log.v("longitudeValDes2", longitudeValDes.toString());
-
-        Log.v("Distance2n : m ", String.valueOf(((MyApplication) this.getApplication()).getDistance()));
-        Log.v("latitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValCurrent()));
-        Log.v("longitudeValCurrent2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValCurrent()));
-        Log.v("latitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlatitudeValDes()));
-        Log.v("longitudeValDes2n", String.valueOf(((MyApplication) this.getApplication()).getlongitudeValDes()));
     }
 
     public void getCoordinates(){
@@ -160,7 +157,6 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
         latitudeValDes = Double.parseDouble(mLatitudeEditText.getText().toString());
         longitudeValDes = Double.parseDouble(mLongitudeEditText.getText().toString());
         distance = Double.parseDouble(String.format("%.4f", meterDistanceBetweenPoints(latitudeValCurrent, longitudeValCurrent, latitudeValDes, longitudeValDes))); // 2 decimalD//
-        shareVariable();
     }
 
     public void shareVariable()
@@ -176,7 +172,7 @@ public class Distance extends MainActivity implements GoogleApiClient.Connection
     {
         Intent intent = new Intent(Distance.this, Barometer.class);
         startActivity(intent);
-        //startActivity(new Intent(Distance.this, Barometer.class));
+        //can  use this command "startActivity(new Intent(Distance.this, Barometer.class));"
     }
 
     public void showErrorMessage(CharSequence text)

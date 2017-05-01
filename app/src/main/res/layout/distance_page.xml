@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:textColor="#f8fcff"
             android:textSize="25dp"
-            android:background="#4670f6" />
+            android:background="#ab4a74ff" />
 
     </TableRow>
 
@@ -142,7 +142,7 @@
             android:layout_height="50dp"
             android:inputType="numberDecimal"
             android:id="@+id/LongitudeEdit"
-            android:background="#4771f6"
+            android:background="#ab4a74ff"
             android:layout_column="1"
             android:layout_weight="1"
             android:textSize="25dp"
@@ -152,7 +152,7 @@
     <Button
 
             android:text="Next"
-            android:id="@+id/button3"
+            android:id="@+id/nextButton"
             android:layout_height="wrap_content"
             android:layout_width="50dp"
             android:background="#00f11c"

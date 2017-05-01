@@ -80,16 +80,7 @@ public class Rotation extends Activity implements SensorEventListener {
             }
         }, 0, 1000);
 
-        // read Sensor
-        try {
-            mSensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
-            mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-            mSensorManager.registerListener(this, mRotationSensor, SENSOR_DELAY);
-        } catch (Exception e) {
-            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
-        }
-
-
+        readSensor();
 
         mButton.setOnClickListener(
                 new View.OnClickListener()
@@ -99,13 +90,23 @@ public class Rotation extends Activity implements SensorEventListener {
 
                         try{
                             setZero = - pitch;
-                            //startActivity(new Intent(Rotation.this, Test.class));
                         }
                         catch(Exception e){
                            showErrorMessage("Error");
                         }
                     }
                 });
+    }
+
+    public void readSensor()
+    {
+        try {
+            mSensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
+            mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            mSensorManager.registerListener(this, mRotationSensor, SENSOR_DELAY);
+        } catch (Exception e) {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -190,6 +191,7 @@ public class Rotation extends Activity implements SensorEventListener {
                 textView.setText("Signal : "+signal +" dBm");
                 signalVal = Double.parseDouble(signal);
                 System.out.print("Signal" + signalVal);
+                // TODO findMax
                /* max = -100;
                 bestAngle = 0;
                 if(signalVal > max)

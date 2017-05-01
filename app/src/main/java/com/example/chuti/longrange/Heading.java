@@ -38,8 +38,7 @@ public class Heading extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.heading_page);
-        calibrate = ((MyApplication) this.getApplication()).getCalibrateVal();
-        receiveValue();
+        getCalibrateValue();
 
         // TextView that will tell the user what degree is he heading
         tvHeading = (TextView) findViewById(R.id.tvHeading);
@@ -53,9 +52,7 @@ public class Heading extends Activity implements SensorEventListener {
                     public void onClick(View view) {
                         // Call Next page
                         try {
-                            //System.out.println("CurrentHeading " + realHeading);
-                            Intent intent = new Intent(Heading.this, RotateHorizontal.class);
-                            startActivity(intent);
+                            callNextPage();
                         } catch (Exception e) {
                             showErrorMessage("An error occured, please try again later.");
                         }
@@ -81,8 +78,8 @@ public class Heading extends Activity implements SensorEventListener {
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-
+    public void onSensorChanged(SensorEvent event)
+    {
         // get the angle around the z-axis rotated
         float degree = Math.round(event.values[0]);
         degree = calibrateDegree(degree);
@@ -98,11 +95,12 @@ public class Heading extends Activity implements SensorEventListener {
         // not in use
     }
 
-    public void CallNextPage()
+    public void callNextPage()
     {
         Intent intent = new Intent(Heading.this, RotateHorizontal.class);
         startActivity(intent);
    }
+
     public void showErrorMessage(CharSequence text){
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
@@ -110,9 +108,9 @@ public class Heading extends Activity implements SensorEventListener {
         toast.show();
     }
 
-    public void receiveValue()
+    public void getCalibrateValue()
     {
-
+        calibrate = ((MyApplication) this.getApplication()).getCalibrateVal();
         Log.v("Calibrate value fc", String.valueOf(String.valueOf(((MyApplication) this.getApplication()).getCalibrateVal())));
     }
 
